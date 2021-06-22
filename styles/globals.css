@@ -1,16 +1,114 @@
-html,
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;700&display=swap");
+
 body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  margin: 0px;
+  font-family: "Nunito Sans Light", sans-serif;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+::selection {
+  background-color: lightblue;
+  background: lightblue;
+}
+nav {
+  height: 40px;
+  display: flex;
+  padding: 20px;
+}
+
+ul {
+  list-style-type: none;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.branding {
+  display: flex;
+  align-items: center;
+}
+
+.items {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.navList {
+  display: flex;
+  justify-content: space-between;
 }
 
 a {
-  color: inherit;
   text-decoration: none;
+  color: black;
 }
 
-* {
-  box-sizing: border-box;
+.navbox {
+  width: 100%;
+  background-color: whitesmoke;
+  display: flex;
+  flex-direction: column;
+  height: 100px;
+  justify-content: space-evenly;
+}
+
+a.active {
+  color: rgb(103, 151, 255);
+  padding-bottom: 2px;
+  border-bottom-style: solid;
+  border-bottom-width: 3.1px;
+  width: fit-content;
+}
+
+button.hamburger {
+  background-color: #f4f4f4;
+  border-radius: 5px;
+  border-color: rgb(226, 226, 226);
+  border-style: solid;
+}
+
+.home {
+  background-color: #f4f4f4;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 60px);
+  align-items: center;
+}
+
+.header {
+  color: transparent;
+  background: rgb(2, 0, 36);
+  user-select: none;
+  background-image: radial-gradient(
+    circle,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(9, 9, 121, 1) 45%,
+    rgba(0, 212, 255, 1) 100%
+  );
+  background-clip: text;
+  background-size: 400%;
+  animation: animate-bg 8s infinite alternate ease-in-out;
+}
+
+@keyframes animate-bg {
+  0% {
+    background-position: left;
+  }
+  100% {
+    background-position: right;
+  }
+}
+
+.desc {
+  color: rgb(99, 99, 99);
+}
+
+.about {
+  background-color: #f4f4f4;
+  display: flex;
+  height: calc(100vh - 60px);
 }
