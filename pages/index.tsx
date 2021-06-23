@@ -1,9 +1,11 @@
 import axios from "axios";
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Spacer from "../components/Spacer";
 import { Carousel } from "react-responsive-carousel";
+import Image from "next/image";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { ImgItem } from "../components/ImgItem";
 type Articles = {
   name: string;
   desc: string;
@@ -13,8 +15,19 @@ type Articles = {
 type props = {
   data: Articles[];
 };
+interface prop {
+  src: string;
+}
 
 export default function Home(props: props) {
+  const Thumbs = (children: React.ReactChild[]) => {
+    return children.map((item) => {
+      return (
+        // @ts-ignore
+        <Image width={100} height={200} src={item.props.src} />
+      );
+    });
+  };
   const [size, setSize] = useState(200);
   const resize = (e: UIEvent) => {
     e.preventDefault();
@@ -35,12 +48,18 @@ export default function Home(props: props) {
         <meta name="description" content="The New Solutions Project." />
 
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://metatags.io/" />
+        <meta
+          property="og:url"
+          content="https://new-solutions-project.vercel.app/"
+        />
         <meta property="og:title" content="New Solutions Project" />
         <meta property="og:description" content="The New Solutions Project." />
 
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://metatags.io/" />
+        <meta
+          property="twitter:url"
+          content="https://new-solutions-project.vercel.app/"
+        />
         <meta property="twitter:title" content="New Solutions Project" />
         <meta
           property="twitter:description"
@@ -79,15 +98,21 @@ export default function Home(props: props) {
               issues and solutions.
             </h4>
           </div>
-          <Carousel infiniteLoop autoPlay showStatus={false} autoFocus>
-            <div>
-              <img src="https://images.unsplash.com/photo-1519430044529-9a9a57177865?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1961&q=80" />
-              <p className="legend">Legend 1</p>
-            </div>
-            <div>
-              <img src="https://images.unsplash.com/photo-1519430044529-9a9a57177865?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1961&q=80" />
-              <p className="legend">Legend 2</p>
-            </div>
+          <Carousel
+            infiniteLoop
+            autoPlay
+            showStatus={false}
+            autoFocus
+            renderThumbs={Thumbs}
+          >
+            <ImgItem
+              legend="he"
+              src="https://images.unsplash.com/photo-1519430044529-9a9a57177865?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1961&q=80"
+            />
+            <ImgItem
+              legend="khd"
+              src="https://images.unsplash.com/photo-1519430044529-9a9a57177865?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1961&q=80"
+            />
           </Carousel>
         </div>
       </div>
