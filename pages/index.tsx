@@ -1,6 +1,9 @@
 import axios from "axios";
 import Head from "next/head";
-
+import { useEffect, useState } from "react";
+import Spacer from "../components/Spacer";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 type Articles = {
   name: string;
   desc: string;
@@ -12,6 +15,17 @@ type props = {
 };
 
 export default function Home(props: props) {
+  const [size, setSize] = useState(200);
+  const resize = (e: UIEvent) => {
+    e.preventDefault();
+    setSize(window.innerWidth);
+  };
+  useEffect(() => {
+    setSize(window.innerWidth);
+    window.addEventListener("resize", (e) => {
+      resize(e);
+    });
+  }, []);
   return (
     <div className="home">
       <Head>
@@ -37,36 +51,44 @@ export default function Home(props: props) {
         className="total"
         style={{
           display: "flex",
-          height: "200px",
           flexDirection: "column",
         }}
       >
-        <h1
-          style={{
-            marginTop: "100px",
-            marginBottom: "0px",
-            fontSize: "260%",
-          }}
-          className="header"
-        >
-          The New Solutions Project
-        </h1>
+        <Spacer y={3} />
         <div
           style={{
-            width: "80vw",
+            width: size > 200 ? "80vw" : "",
           }}
+          className="landing"
         >
-          <h3>What is our goal?</h3>
-          <h4 className="desc">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore hic
-            itaque quae molestias molestiae aliquam velit dignissimos cumque
-            quisquam omnis magnam minima repudiandae, eum unde libero impedit
-            ullam! Animi, nisi. Lorem ipsum dolor sit amet consectetur,
-            adipisicing elit. Officiis magni repudiandae sequi optio? Magnam
-            labore iusto excepturi quos, maiores possimus impedit veniam
-            necessitatibus fugit, dolorum laudantium enim molestias corporis
-            pariatur.
-          </h4>
+          <div>
+            <h1
+              style={{
+                marginBottom: "0px",
+                fontSize: "260%",
+                marginTop: "0px",
+              }}
+              className="header"
+            >
+              The New Solutions Project
+            </h1>
+            <h4 className="desc">
+              Our mission is to research world problems and find viable
+              solutions to these problems to improve living standards around the
+              world. We produce high quality editions where we detail these
+              issues and solutions.
+            </h4>
+          </div>
+          <Carousel infiniteLoop autoPlay showStatus={false} autoFocus>
+            <div>
+              <img src="https://images.unsplash.com/photo-1519430044529-9a9a57177865?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1961&q=80" />
+              <p className="legend">Legend 1</p>
+            </div>
+            <div>
+              <img src="https://images.unsplash.com/photo-1519430044529-9a9a57177865?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1961&q=80" />
+              <p className="legend">Legend 2</p>
+            </div>
+          </Carousel>
         </div>
       </div>
     </div>
