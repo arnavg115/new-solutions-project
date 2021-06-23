@@ -131,7 +131,9 @@ export default function Home({ data }: props) {
 
 export async function getServerSideProps(context: any) {
   try {
-    const res = await axios.get("http://localhost:3000/api/list");
+    const res = await axios.get(
+      "https://new-solutions-project.vercel.app//api/list"
+    );
     const data = res.data;
     console.log(data);
     return {
