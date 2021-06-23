@@ -23,8 +23,13 @@ export default function Home(props: props) {
   const Thumbs = (children: React.ReactChild[]) => {
     return children.map((item) => {
       return (
-        // @ts-ignore
-        <Image width={100} height={200} src={item.props.src} />
+        <Image
+          width={100}
+          height={200}
+          // @ts-ignore
+          src={item.props.src}
+          key={Math.floor(Math.random() * 100000)}
+        />
       );
     });
   };
