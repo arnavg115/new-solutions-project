@@ -116,7 +116,9 @@ export default function Home({ data }: props) {
               <div className="card" key={x.num}>
                 <h3>{x.name}</h3>
                 {x.articles.map((y) => {
-                  return <p>{y.name}</p>;
+                  return (
+                    <p key={Math.floor(Math.random() * 100000)}>{y.name}</p>
+                  );
                 })}
               </div>
             );
