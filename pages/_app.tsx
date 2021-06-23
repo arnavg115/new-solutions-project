@@ -8,7 +8,10 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <div>
       <Head>
-        <title>Home</title>
+        <link
+          rel="icon"
+          href="https://img.icons8.com/fluent/96/000000/project.png"
+        />
       </Head>
       <Navbar />
       <Component {...pageProps} />

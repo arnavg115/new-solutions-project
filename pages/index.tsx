@@ -6,20 +6,9 @@ import { Carousel } from "react-responsive-carousel";
 import Image from "next/image";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { ImgItem } from "../components/ImgItem";
-type Articles = {
-  name: string;
-  desc: string;
-  href: string;
-};
+import { props } from "../interfaces";
 
-type props = {
-  data: Articles[];
-};
-interface prop {
-  src: string;
-}
-
-export default function Home(props: props) {
+export default function Home({ data }: props) {
   const Thumbs = (children: React.ReactChild[]) => {
     return children.map((item) => {
       return (
@@ -111,14 +100,27 @@ export default function Home(props: props) {
             renderThumbs={Thumbs}
           >
             <ImgItem
-              legend="he"
+              legend="placeholder"
               src="https://images.unsplash.com/photo-1519430044529-9a9a57177865?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1961&q=80"
             />
             <ImgItem
-              legend="khd"
+              legend="placeholder"
               src="https://images.unsplash.com/photo-1519430044529-9a9a57177865?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1961&q=80"
             />
           </Carousel>
+        </div>
+        <h2>Take a look out our editions</h2>
+        <div className="row">
+          {data.map((x) => {
+            return (
+              <div className="card" key={x.num}>
+                <h3>{x.name}</h3>
+                {x.articles.map((y) => {
+                  return <p>{y.name}</p>;
+                })}
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>

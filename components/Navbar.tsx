@@ -29,11 +29,11 @@ export const Navbar = () => {
   }, []);
   const width = () => {
     if (size > 1600) {
-      return "10%";
+      return "14%";
     } else if (size > 1000) {
-      return "15%";
+      return "19%";
     } else {
-      return "20%";
+      return "24%";
     }
   };
   return (
@@ -62,6 +62,15 @@ export const Navbar = () => {
                   <Link href="/about">
                     <a className={router.pathname === "/about" ? "active" : ""}>
                       About
+                    </a>
+                  </Link>
+                  <Link href="/editions">
+                    <a
+                      className={
+                        router.pathname === "/editions" ? "active" : ""
+                      }
+                    >
+                      Editions
                     </a>
                   </Link>
                 </div>
@@ -94,6 +103,11 @@ export const Navbar = () => {
               <Link href="/about">
                 <a className={router.pathname === "/about" ? "active" : ""}>
                   About
+                </a>
+              </Link>
+              <Link href="/editions">
+                <a className={router.pathname === "/editions" ? "active" : ""}>
+                  Editions
                 </a>
               </Link>
             </div>

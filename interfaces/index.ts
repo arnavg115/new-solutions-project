@@ -1,14 +1,14 @@
-export interface themeDispatch {
-  type: string;
+export interface Articles {
+  name: string;
+  desc: string;
+  href: string;
 }
-export interface theme {
-  theme: string;
+export interface Editions {
+  num: number;
+  name: string;
+  articles: Articles[];
 }
 
-export interface action {
-  type: string;
-}
-
-export interface state {
-  theme: "light" | "dark";
+export interface props {
+  data: Editions[];
 }
