@@ -145,7 +145,7 @@ ul.thumbs.animated {
   transition: top ease 0.5s;
 }
 
-.card:hover {
+.hover:hover {
   top: -10px;
   color: rgb(59, 59, 59);
   background-color: #ebebeb;
@@ -215,4 +215,7 @@ ul.thumbs.animated {
   100% {
     background-position: right;
   }
+}
+.reactive {
+  width: 80%;
 }

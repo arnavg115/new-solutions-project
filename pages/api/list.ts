@@ -13,12 +13,12 @@ export default function handler(
         {
           name: "How do we urge people to create deeper connections in our increasingly disconnected modern world?",
           desc: "Comming Soon",
-          href: "Coming Soon",
+          href: "deep-connections-disconnected-world",
         },
         {
           name: "How do we find a common identity in the United States which will bring together the contrasting perspectives that exist? ",
           desc: "Comming Soon",
-          href: "Coming Soon",
+          href: "omingoon",
         },
       ],
     },
@@ -29,12 +29,12 @@ export default function handler(
         {
           name: "Coming soon",
           desc: "Comming Soon",
-          href: "Coming Soon",
+          href: "omingoon",
         },
         {
           name: "Coming soon",
-          desc: "Comming Soon",
-          href: "Coming Soon",
+          desc: "ommingoon",
+          href: "omingoon",
         },
       ],
     },

@@ -113,7 +113,7 @@ export default function Home({ data }: props) {
         <div className="row">
           {data.map((x) => {
             return (
-              <div className="card" key={x.num}>
+              <div className="card hover" key={x.num}>
                 <h3>{x.name}</h3>
                 {x.articles.map((y) => {
                   return (
