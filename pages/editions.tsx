@@ -5,7 +5,7 @@ import React from "react";
 import Spacer from "../components/Spacer";
 import { props } from "../interfaces";
 
-const editions = ({ data }: props) => {
+const Editions = ({ data }: props) => {
   const router = useRouter();
   return (
     <div
@@ -44,11 +44,13 @@ const editions = ({ data }: props) => {
   );
 };
 
-export default editions;
+export default Editions;
 
 export async function getServerSideProps(context: any) {
   try {
-    const res = await axios.get("http://localhost:3000/api/list");
+    const res = await axios.get(
+      "https://new-solutions-project.vercel.app//api/list"
+    );
     const data = res.data;
     return {
       props: {
