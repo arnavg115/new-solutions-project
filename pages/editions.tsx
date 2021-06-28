@@ -20,7 +20,7 @@ const Editions = ({ data }: props) => {
       <Spacer y={3} />
       {data.map((x) => {
         return (
-          <div>
+          <div key={Math.floor(Math.random() * 1039485098)}>
             <div className="card hover" key={x.num} style={{ width: "80vw" }}>
               <h2>{x.name}</h2>
               {x.articles.map((y) => {
