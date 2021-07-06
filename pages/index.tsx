@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Spacer from "../components/Spacer";
 import { Carousel } from "react-responsive-carousel";
@@ -8,6 +7,8 @@ import { ImgItem } from "../components/ImgItem";
 import { props } from "../interfaces";
 import { Header } from "../components/Header";
 import { Link } from "@geist-ui/react";
+import { client } from "../graphql/client";
+import { gql } from "@apollo/client";
 
 export default function Home({ data }: props) {
   const Thumbs = (children: React.ReactChild[]) => {
@@ -112,21 +113,24 @@ export default function Home({ data }: props) {
 }
 
 export async function getServerSideProps(context: any) {
-  try {
-    const res = await axios.get("http://localhost:3000/api/list");
-    const data = res.data;
-    console.log(data);
-    return {
-      props: {
-        data,
-      },
-    };
-  } catch (err) {
-    console.log(err);
-    return {
-      props: {
-        data: [],
-      },
-    };
-  }
+  const { data } = await client.query({
+    query: gql`
+      {
+        getMany {
+          name
+          num
+          articles {
+            name
+            href
+            desc
+          }
+        }
+      }
+    `,
+  });
+  return {
+    props: {
+      data: data.getMany,
+    },
+  };
 }
