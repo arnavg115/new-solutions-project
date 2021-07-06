@@ -1,5 +1,6 @@
 h1 {
   font-weight: 400;
+  font-size: 1rem;
 }
 
 h3 {
@@ -8,4 +9,13 @@ h3 {
 
 h4 {
   font-weight: 400;
+}
+.article-lay {
+  width: 80%;
+}
+
+@media screen and (max-width: 1100px) {
+  .article-lay {
+    width: 100%;
+  }
 }

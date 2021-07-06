@@ -8,4 +8,13 @@ module.exports = withMDX({
   images: {
     domains: ["lh3.googleusercontent.com", "images.unsplash.com"],
   },
+  webpack: (
+    config,
+    { buildId, dev, isServer, defaultLoaders, webpack, typescript }
+  ) => {
+    config.experiments = {
+      topLevelAwait: true,
+    };
+    return config;
+  },
 });

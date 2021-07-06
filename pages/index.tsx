@@ -1,5 +1,4 @@
 import axios from "axios";
-import Head from "next/head";
 import React, { useEffect, useState } from "react";
 import Spacer from "../components/Spacer";
 import { Carousel } from "react-responsive-carousel";
@@ -7,6 +6,8 @@ import Image from "next/image";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { ImgItem } from "../components/ImgItem";
 import { props } from "../interfaces";
+import { Header } from "../components/Header";
+import { Link } from "@geist-ui/react";
 
 export default function Home({ data }: props) {
   const Thumbs = (children: React.ReactChild[]) => {
@@ -35,31 +36,7 @@ export default function Home({ data }: props) {
   }, []);
   return (
     <div className="home">
-      <Head>
-        <title>Home</title>
-
-        <meta name="title" content="New Solutions Project" />
-        <meta name="description" content="The New Solutions Project." />
-
-        <meta property="og:type" content="website" />
-        <meta
-          property="og:url"
-          content="https://new-solutions-project.vercel.app/"
-        />
-        <meta property="og:title" content="New Solutions Project" />
-        <meta property="og:description" content="The New Solutions Project." />
-
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta
-          property="twitter:url"
-          content="https://new-solutions-project.vercel.app/"
-        />
-        <meta property="twitter:title" content="New Solutions Project" />
-        <meta
-          property="twitter:description"
-          content="The New Solutions Project."
-        />
-      </Head>
+      <Header title="Home" />
       <div
         className="total"
         style={{
@@ -114,12 +91,17 @@ export default function Home({ data }: props) {
           {data.map((x) => {
             return (
               <div className="card hover" key={x.num}>
-                <h3>{x.name}</h3>
-                {x.articles.map((y) => {
-                  return (
-                    <p key={Math.floor(Math.random() * 100000)}>{y.name}</p>
-                  );
-                })}
+                <Link
+                  href={`/edition/${x.num}`}
+                  style={{ display: "flex", flexDirection: "column" }}
+                >
+                  <h3>{x.name}</h3>
+                  {x.articles.map((y) => {
+                    return (
+                      <p key={Math.floor(Math.random() * 100000)}>{y.name}</p>
+                    );
+                  })}
+                </Link>
               </div>
             );
           })}
@@ -131,9 +113,7 @@ export default function Home({ data }: props) {
 
 export async function getServerSideProps(context: any) {
   try {
-    const res = await axios.get(
-      "https://new-solutions-project.vercel.app//api/list"
-    );
+    const res = await axios.get("http://localhost:3000/api/list");
     const data = res.data;
     console.log(data);
     return {

@@ -1,8 +1,10 @@
+import { gql } from "@apollo/client";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import Spacer from "../components/Spacer";
+import { client } from "../graphql/client";
 import { props } from "../interfaces";
 
 const Editions = ({ data }: props) => {
@@ -47,22 +49,30 @@ const Editions = ({ data }: props) => {
 export default Editions;
 
 export async function getServerSideProps(context: any) {
-  try {
-    const res = await axios.get(
-      "https://new-solutions-project.vercel.app//api/list"
-    );
-    const data = res.data;
-    return {
-      props: {
-        data,
-      },
-    };
-  } catch (err) {
-    console.log(err);
-    return {
-      props: {
-        data: [],
-      },
-    };
-  }
+  const { data } = await client.query({
+    query: gql`
+      {
+        getMany {
+          name
+          num
+          articles {
+            name
+            desc
+            href
+          }
+        }
+      }
+    `,
+  });
+  console.log({
+    props: {
+      data: data.getMany,
+    },
+  });
+
+  return {
+    props: {
+      data: data.getMany,
+    },
+  };
 }

@@ -39,6 +39,13 @@ export const Navbar = () => {
   return (
     <div className="total">
       <nav className="nav" style={shifted}>
+        <style>
+          {`@media screen and (max-width: 564px) {
+            h3{
+              font-size:medium;
+            }
+}`}
+        </style>
         <div className="branding">
           <h3>New Solutions Project</h3>
         </div>

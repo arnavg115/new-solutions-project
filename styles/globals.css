@@ -108,12 +108,15 @@ button.hamburger {
   gap: 10px;
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 500px) {
   .landing {
     display: flex;
     flex-direction: column;
   }
   h1 {
+    font-size: small;
+  }
+  h3 {
     font-size: small;
   }
 }
