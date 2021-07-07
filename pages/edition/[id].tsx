@@ -9,6 +9,7 @@ const Edition: FC = (props) => {
   const { id } = router.query;
   const { data, loading, error } = useGetOneQuery({
     variables: {
+      // @ts-ignore
       index: parseInt(id) - 1,
     },
   });
