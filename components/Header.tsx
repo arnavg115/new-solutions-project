@@ -12,9 +12,12 @@ export const Header: FC<props> = ({ title }) => {
         <title>{title}</title>
         <meta name="title" content={`New Solutions Project | ${title}`} />
         <meta name="description" content="The New Solutions Project." />
-
+        <meta name="viewport" content="width=device-width" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://metatags.io/" />
+        <meta
+          property="og:url"
+          content="https://new-solutions-project.vercel.app/"
+        />
         <meta
           property="og:title"
           content={`New Solutions Project | ${title}`}

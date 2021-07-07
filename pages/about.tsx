@@ -1,10 +1,12 @@
 import Head from "next/head";
 import React from "react";
+import { Header } from "../components/Header";
+import Spacer from "../components/Spacer";
 
 const about = () => {
   return (
     <div className="about">
-
+      <Header title="About" />
       <div className="aboutmain">
         <div
           style={{
@@ -19,6 +21,7 @@ const about = () => {
         >
           <h1 className="aboutheader">About</h1>
         </div>
+        <Spacer y={1} />
         <div
           style={{
             width: "80vw",
@@ -48,6 +51,7 @@ const about = () => {
               width: "80vw",
               height: "35vh",
               borderStyle: "none",
+              overflowX: "hidden",
             }}
           ></iframe>
         </div>

@@ -4,19 +4,35 @@ import type { AppProps } from "next/app";
 import { Navbar } from "../components/Navbar";
 import React from "react";
 import Head from "next/head";
-import { CssBaseline, GeistProvider } from "@geist-ui/react";
+import { CssBaseline, GeistProvider, Themes } from "@geist-ui/react";
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const myTheme1 = Themes.createFromLight({
+    type: "coolTheme",
+    palette: {
+      success: "#6797FF",
+    },
+  });
+  const client = new ApolloClient({
+    uri:
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:3000/api/graphql"
+        : "https://new-solutions-project.vercel.app/api/graphql",
+    cache: new InMemoryCache(),
+    ssrMode: typeof window === "undefined",
+  });
   return (
-    <GeistProvider>
-      <Head>
-        <link
-          rel="icon"
-          href="https://img.icons8.com/fluent/96/000000/project.png"
-        />
-      </Head>
-      <style>
-        {`
+    <ApolloProvider client={client}>
+      <GeistProvider themes={[myTheme1]} themeType="coolTheme">
+        <Head>
+          <link
+            rel="icon"
+            href="https://img.icons8.com/fluent/96/000000/project.png"
+          />
+        </Head>
+        <style>
+          {`
           ::selection{
             background-color:lightblue
           }
@@ -27,11 +43,12 @@ function MyApp({ Component, pageProps }: AppProps) {
             color: black; 
           }
         `}
-      </style>
-      <Navbar />
-      <Component {...pageProps} />
-      <CssBaseline />
-    </GeistProvider>
+        </style>
+        <Navbar />
+        <Component {...pageProps} />
+        <CssBaseline />
+      </GeistProvider>
+    </ApolloProvider>
   );
 }
 export default MyApp;

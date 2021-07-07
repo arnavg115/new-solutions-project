@@ -1,0 +1,11 @@
+query getOne($index: Int!) {
+  getOne(index: $index) {
+    name
+    num
+    articles {
+      name
+      desc
+      href
+    }
+  }
+}
