@@ -1,14 +1,36 @@
 import { gql } from "@apollo/client";
-import axios from "axios";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import React from "react";
+import { Input, Button } from "@geist-ui/react";
+import React, { useState } from "react";
 import Spacer from "../components/Spacer";
-import { client } from "../graphql/client";
+import { client } from "../graphql-client/client";
 import { props } from "../interfaces";
-
+import { IoSearch } from "react-icons/io5";
+import { Header } from "../components/Header";
 const Editions = ({ data }: props) => {
-  const router = useRouter();
+  const [datag, setDatag] = useState(data);
+
+  const [s, setS] = useState("");
+  const search = async () => {
+    const res = await client.query({
+      query: gql`
+        query Search($query: String!) {
+          getSearch(query: $query) {
+            name
+            num
+            articles {
+              name
+              desc
+              href
+            }
+          }
+        }
+      `,
+      variables: { query: s },
+    });
+    console.log(res.data);
+    setDatag(res.data.getSearch);
+  };
   return (
     <div
       style={{
@@ -16,11 +38,42 @@ const Editions = ({ data }: props) => {
         alignItems: "center",
         flexDirection: "column",
         width: "100vw",
-        height: "100vh",
+        marginTop: "30px",
       }}
     >
+      <Header title="Editions" />
       <Spacer y={3} />
-      {data.map((x) => {
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        <Input
+          placeholder="Search"
+          icon={<IoSearch />}
+          clearable
+          style={{
+            width: "50vw",
+          }}
+          value={s}
+          onChange={(e) => {
+            setS(e.target.value);
+          }}
+        />
+        <div style={{ width: "30px" }}></div>
+        <Button
+          size="small"
+          onClick={(e) => {
+            search();
+          }}
+          type="success"
+        >
+          Search
+        </Button>
+      </div>
+      <Spacer y={5} />
+      {datag.map((x) => {
         return (
           <div key={Math.floor(Math.random() * 1039485098)}>
             <div className="card hover" key={x.num} style={{ width: "80vw" }}>

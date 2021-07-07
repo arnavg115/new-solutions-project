@@ -7,7 +7,7 @@ import { ImgItem } from "../components/ImgItem";
 import { props } from "../interfaces";
 import { Header } from "../components/Header";
 import { Link } from "@geist-ui/react";
-import { client } from "../graphql/client";
+import { client } from "../graphql-client/client";
 import { gql } from "@apollo/client";
 
 export default function Home({ data }: props) {
@@ -55,9 +55,7 @@ export default function Home({ data }: props) {
           <div>
             <h1
               style={{
-                marginBottom: "0px",
                 fontSize: "260%",
-                marginTop: "0px",
               }}
               className="header"
             >

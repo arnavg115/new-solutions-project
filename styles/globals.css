@@ -103,6 +103,7 @@ button.hamburger {
 }
 
 .landing {
+  align-self: center;
   display: grid;
   grid-template-columns: 40vw 40vw;
   gap: 10px;
