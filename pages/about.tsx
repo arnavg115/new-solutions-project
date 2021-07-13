@@ -1,17 +1,8 @@
-import { gql, useQuery } from "@apollo/client";
-import Head from "next/head";
 import React from "react";
 import { Header } from "../components/Header";
 import Spacer from "../components/Spacer";
 
 const about = () => {
-  const { data } = useQuery(gql`
-    {
-      getAll {
-        name
-      }
-    }
-  `);
   return (
     <div className="about">
       <Header title="About" />
