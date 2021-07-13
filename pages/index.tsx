@@ -114,13 +114,13 @@ export async function getServerSideProps(context: any) {
   const { data } = await client.query({
     query: gql`
       {
-        getMany {
-          name
+        getAll {
           num
+          name
           articles {
             name
-            href
             desc
+            href
           }
         }
       }
@@ -128,7 +128,7 @@ export async function getServerSideProps(context: any) {
   });
   return {
     props: {
-      data: data.getMany,
+      data: data.getAll,
     },
   };
 }

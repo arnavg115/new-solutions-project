@@ -16,33 +16,103 @@ export type Scalars = {
 
 export type Article = {
   __typename?: 'Article';
+  id: Scalars['Int'];
   name: Scalars['String'];
   desc: Scalars['String'];
   href: Scalars['String'];
+  Edition: Edition;
 };
 
-export type Editions = {
-  __typename?: 'Editions';
+export type Edition = {
+  __typename?: 'Edition';
+  id: Scalars['Int'];
   num: Scalars['Int'];
   name: Scalars['String'];
   articles: Array<Article>;
 };
 
+export type Email = {
+  __typename?: 'Email';
+  email: Scalars['String'];
+};
+
+export type LoginResponse = {
+  __typename?: 'LoginResponse';
+  accessToken: Scalars['String'];
+  user: User;
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  login: LoginResponse;
+  logout: Scalars['Boolean'];
+  register: Scalars['Boolean'];
+  addOneEdition: Scalars['Boolean'];
+  addOneArticle: Scalars['Boolean'];
+  addEmail: Scalars['Boolean'];
+  DeleteEmail: Scalars['Boolean'];
+};
+
+
+export type MutationLoginArgs = {
+  password: Scalars['String'];
+  username: Scalars['String'];
+};
+
+
+export type MutationRegisterArgs = {
+  adminPassword: Scalars['String'];
+  password: Scalars['String'];
+  username: Scalars['String'];
+};
+
+
+export type MutationAddOneEditionArgs = {
+  num: Scalars['Int'];
+  name: Scalars['String'];
+};
+
+
+export type MutationAddOneArticleArgs = {
+  Edition_Num: Scalars['Int'];
+  desc: Scalars['String'];
+  name: Scalars['String'];
+};
+
+
+export type MutationAddEmailArgs = {
+  email: Scalars['String'];
+};
+
+
+export type MutationDeleteEmailArgs = {
+  email: Scalars['String'];
+};
+
 export type Query = {
   __typename?: 'Query';
   hello: Scalars['String'];
-  getOne: Editions;
-  getMany: Array<Editions>;
+  me?: Maybe<User>;
+  getAll: Array<Edition>;
+  getOneEdition: Edition;
+  getSearch: Array<Edition>;
+  getAllEmails: Array<Email>;
 };
 
 
-export type QueryHelloArgs = {
-  text: Scalars['String'];
-};
-
-
-export type QueryGetOneArgs = {
+export type QueryGetOneEditionArgs = {
   index: Scalars['Int'];
+};
+
+
+export type QueryGetSearchArgs = {
+  query: Scalars['String'];
+};
+
+export type User = {
+  __typename?: 'User';
+  id: Scalars['Int'];
+  username: Scalars['String'];
 };
 
 export type GetOneQueryVariables = Exact<{
@@ -52,9 +122,9 @@ export type GetOneQueryVariables = Exact<{
 
 export type GetOneQuery = (
   { __typename?: 'Query' }
-  & { getOne: (
-    { __typename?: 'Editions' }
-    & Pick<Editions, 'name' | 'num'>
+  & { getOneEdition: (
+    { __typename?: 'Edition' }
+    & Pick<Edition, 'name' | 'num'>
     & { articles: Array<(
       { __typename?: 'Article' }
       & Pick<Article, 'name' | 'desc' | 'href'>
@@ -62,20 +132,10 @@ export type GetOneQuery = (
   ) }
 );
 
-export type HelloQueryVariables = Exact<{
-  name: Scalars['String'];
-}>;
-
-
-export type HelloQuery = (
-  { __typename?: 'Query' }
-  & Pick<Query, 'hello'>
-);
-
 
 export const GetOneDocument = gql`
     query getOne($index: Int!) {
-  getOne(index: $index) {
+  getOneEdition(index: $index) {
     name
     num
     articles {
@@ -114,36 +174,3 @@ export function useGetOneLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Get
 export type GetOneQueryHookResult = ReturnType<typeof useGetOneQuery>;
 export type GetOneLazyQueryHookResult = ReturnType<typeof useGetOneLazyQuery>;
 export type GetOneQueryResult = Apollo.QueryResult<GetOneQuery, GetOneQueryVariables>;
-export const HelloDocument = gql`
-    query Hello($name: String!) {
-  hello(text: $name)
-}
-    `;
-
-/**
- * __useHelloQuery__
- *
- * To run a query within a React component, call `useHelloQuery` and pass it any options that fit your needs.
- * When your component renders, `useHelloQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useHelloQuery({
- *   variables: {
- *      name: // value for 'name'
- *   },
- * });
- */
-export function useHelloQuery(baseOptions: Apollo.QueryHookOptions<HelloQuery, HelloQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<HelloQuery, HelloQueryVariables>(HelloDocument, options);
-      }
-export function useHelloLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<HelloQuery, HelloQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<HelloQuery, HelloQueryVariables>(HelloDocument, options);
-        }
-export type HelloQueryHookResult = ReturnType<typeof useHelloQuery>;
-export type HelloLazyQueryHookResult = ReturnType<typeof useHelloLazyQuery>;
-export type HelloQueryResult = Apollo.QueryResult<HelloQuery, HelloQueryVariables>;

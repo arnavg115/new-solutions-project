@@ -15,10 +15,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     },
   });
   const client = new ApolloClient({
-    uri:
-      process.env.NODE_ENV === "development"
-        ? "http://localhost:3000/api/graphql"
-        : "https://new-solutions-project.vercel.app/api/graphql",
+    uri: process.env.NEXT_PUBLIC_BACKEND + "/graphql",
     cache: new InMemoryCache(),
     ssrMode: typeof window === "undefined",
   });
